@@ -1,0 +1,26 @@
+# One service per app from HeyPuter/everything. To add an app, copy a block,
+# change APP, the service name and the SERVICE_FQDN_<NAME>_80 variable.
+services:
+  email:
+    build:
+      context: .
+      dockerfile: deploy/coolify/Dockerfile
+      args:
+        APP: email
+    expose:
+      - "80"
+    environment:
+      - SERVICE_FQDN_EMAIL_80=https://email.marinesense.in
+    restart: unless-stopped
+
+  accounting:
+    build:
+      context: .
+      dockerfile: deploy/coolify/Dockerfile
+      args:
+        APP: accounting
+    expose:
+      - "80"
+    environment:
+      - SERVICE_FQDN_ACCOUNTING_80=https://accounting.marinesense.in
+    restart: unless-stopped
